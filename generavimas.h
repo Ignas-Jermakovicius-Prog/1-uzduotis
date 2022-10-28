@@ -1,19 +1,10 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <vector>
-#include <iomanip>
-#include <fstream>
-#include <sstream>
-#include <iterator>
-#include <stdlib.h>
-#include <numeric>
-#include <chrono>
-#include "genrandom.h"
-#include "readFile.h"
-#include "genpaz.h"
-#include "countgal.h"
+#include "build_lib.h";
+#include "stud.h";
 
 using namespace std;
 
-int generavimas(vector<int> pazymiai);
+int countWords(string const& str);
+void failogeneravimas(int kiek);
+void skaitymas(vector<stud>& S, string failo_pavadinimas, int* kiek);
+void isvedimas(string failo_pavadinimas, vector<stud> vek);

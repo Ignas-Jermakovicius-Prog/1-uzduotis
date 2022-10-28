@@ -29,18 +29,19 @@ void readFile(vector<stud>& S, int* paz) // failo nuskaitymo funkcija
                 fileRead >> S.at(studentas).Vard;
                 if (fileRead.eof()) { S.pop_back(); break; }
                 fileRead >> S.at(studentas).Pav;
-                for (int i = 0; i < *paz; i++)
+              for (int i = 0; i < *paz; i++)
                 {
                     fileRead >> temp;
                     S.at(studentas).paz.push_back(temp);
+                    sum = sum + temp;
                 }
                 fileRead >> S.at(studentas).egz;
-                S.at(studentas).gal = S.at(studentas).gal / *paz;
-                S.at(studentas).gal = 0.4 * S.at(studentas).gal + 0.6 * S.at(studentas).egz;
+                S.at(studentas).gal = 0.4 * accumulate(S.at(studentas).paz.begin(),S.at(studentas).paz.end(),0)/(S.at(studentas).paz.size()) 
+                                      + 0.6 * S.at(studentas).egz;
                 studentas++;
             }
         }
-    } 
+    }
     catch (int e)
     {
         cout << "Neteisingai ivestas failo pavadinimas " << endl;

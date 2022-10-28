@@ -21,6 +21,6 @@ void printStudent(vector<stud> S, int pazkiek) //funkcija atspausdinanti rezulta
         out << setw(20) << left << S[i].Vard
             << setw(20) << left << S[i].Pav
             << setw(20) << left << S[i].gal
-            << countMedian(S[i].paz) << endl;
+            << setw(20) << left << 0.4 * countMedian(S[i].paz) + 0.6 * S[i].egz << endl;
     }
 }

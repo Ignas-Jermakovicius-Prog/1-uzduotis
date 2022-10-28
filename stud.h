@@ -1,11 +1,11 @@
 #pragma once
-#include <string>
-#include <vector>
+#include "build_lib.h";
 using namespace std;
 
 struct stud {
     string Vard, Pav;
-    vector<int> paz = { 0 };
+    vector<int> paz;
     int egz;
-    float gal = 0;
+    float gal;
+    float med;
 };

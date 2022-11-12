@@ -10,37 +10,31 @@ struct stud {
     float med;
 };
 
-void vid(stud& s)
+float vid(vector<int> paz)
 {
-    int pazymiu_suma = accumulate(s.paz.begin(), s.paz.end(), 0);
-    int pazymiu_vidurkis = pazymiu_suma / s.paz.size();
-    s.gal = 0.4 * pazymiu_vidurkis + 0.6 * s.egz;
+    int pazymiu_suma = accumulate(paz.begin(), paz.end(), 0);
+    int pazymiu_vidurkis = pazymiu_suma / paz.size();
+    return pazymiu_vidurkis;
 }
-void med(stud& s)
+float med(vector<int> paz) //funkcija skaiciuojanti mediana
 {
-    vector<int> pazymiai;
-    for (int i = 0; i < s.paz.size(); i++)
-    {
-        pazymiai.push_back(s.paz[i]);
-    }
-    pazymiai.push_back(s.egz);
-    sort(pazymiai.begin(), pazymiai.end());
+    sort(paz.begin(), paz.end());
 
     float mediana;
 
-    if (pazymiai.size() == 0)
+    if (paz.size() == 0)
     {
         mediana = 0;
     }
-    else if (pazymiai.size() % 2 == 0)
+    else if (paz.size() % 2 == 0)
     {
-        mediana = (pazymiai[pazymiai.size() / 2] + pazymiai[pazymiai.size() / 2 - 1]) / 2.0;
+        mediana = (paz[paz.size() / 2] + paz[paz.size() / 2 - 1]) / 2.0;
     }
     else
     {
-        mediana = pazymiai[(pazymiai.size() - 1) / 2];
+        mediana = paz[(paz.size() - 1) / 2];
     }
-    s.med = 0.4 * mediana + 0.6 * s.egz;
+    return mediana;
 }
 
 int randompaz()
@@ -49,50 +43,51 @@ int randompaz()
     uniform_int_distribution<int> dist(1, 10);
     return dist(mt);
 }
-void autopaz(stud S[], int i, int pazkiek)
+void autopaz(vector<stud> S, int i, int pazkiek)
 {
-    S[i].egz = randompaz();
+    S.at(i).egz = randompaz();
     for (int j = 0; j < pazkiek; j++)
     {
-        S[i].paz.push_back(randompaz());
+        S.at(i).paz.push_back(randompaz());
     }
-    vid(S[i]);
-    med(S[i]);
+    S.at(i).gal = vid(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
+    S.at(i).med = med(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
 }
-void input(stud S[], int i)
+void input(vector<stud>& S, int i)
 {
-    int temp;
+    int temp, egz;
     cout << "Iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
     cin >> temp;
     while (temp != -1) {
-        S[i].paz.push_back(temp);
+        S.at(i).paz.push_back(temp);
         cin >> temp;
     }
     do {
         cout << "Iveskite studento EGZ:\n";
-        cin >> S[i].egz;
-    } while (S[i].egz < 0 || S[i].egz > 10);
-    vid(S[i]);
-    med(S[i]);
+        cin >> egz;
+        S.at(i).egz = egz;
+    } while (egz < 0 || egz > 10);
+    S.at(i).gal = vid(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
+    S.at(i).med = med(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
 }
 bool has_digit(string s)
 {
     return (s.find_first_of("0123456789") != string::npos);
 }
-void name_input(stud S[], int i)
+void name_input(vector<stud>& S, int i)
 {
     cout << "Iveskite studento nr. " << i + 1 << " duomenis:\n";
     do {
         cout << "Iveskite studento nr. " << i + 1 << " VARDA:\n";
-        cin >> S[i].Vard;
-    } while (S[i].Vard.length() < 0 || S[i].Vard.length() > 25 || has_digit(S[i].Vard));
+        cin >> S.at(i).Vard;
+    } while (S.at(i).Vard.length() < 0 || S.at(i).Vard.length() > 25 || has_digit(S.at(i).Vard));
     do {
         cout << "Iveskite studento nr. " << i + 1 << " PAV:\n";
-        cin >> S[i].Pav;
-    } while (S[i].Pav.length() < 0 && S[i].Pav.length() > 25 || has_digit(S[i].Pav));
+        cin >> S.at(i).Pav;
+    } while (S.at(i).Pav.length() < 0 && S.at(i).Pav.length() > 25 || has_digit(S.at(i).Pav));
     cout << endl;
 }
-void print_student(stud S[], int studentu_sk) //atspausdina rezultatus
+void print_student(vector<stud> S, int studentu_sk) //atspausdina rezultatus
 {
     cout << "\n\n";
     cout << setw(20) << left << "Vardas"
@@ -102,10 +97,10 @@ void print_student(stud S[], int studentu_sk) //atspausdina rezultatus
         << "--------------------------------------------------------------------------\n";
     for (int i = 0; i < studentu_sk; i++)
     {
-        cout << setw(20) << left << S[i].Vard
-            << setw(20) << left << S[i].Pav
-            << setw(18) << left << S[i].gal
-            << left << S[i].med << endl;
+        cout << setw(20) << left << S.at(i).Vard
+            << setw(20) << left << S.at(i).Pav
+            << setw(18) << left << S.at(i).gal
+            << left << S.at(i).med << endl;
     }
     cout << "\n\n";
 }
@@ -119,7 +114,8 @@ int main()
         cout << "Iveskite studentu kieki:\n";
         cin >> studentu_sk;
     } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
-    stud S[25];
+    vector<stud> S;
+    S.resize(S.size() + studentu_sk);
     do
     {
         cout << "Jeigu norite, kad studentu pazymiai butu suvesti automatiskai - SPAUSKITE \"R\"\n Jeigu norite suvesti duomenis patys - RASYKITE \"P\"\n";
@@ -136,7 +132,7 @@ int main()
         }
         else {
             autopaz(S, i, 5);
-        }
+        }  
     }
     print_student(S, studentu_sk);
     system("pause");

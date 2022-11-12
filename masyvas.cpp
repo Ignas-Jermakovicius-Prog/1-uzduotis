@@ -3,33 +3,38 @@
 using namespace std;
 
 struct stud {
-    string Vard, Pav;
-    int paz[10] = {0};
+    string vard, pav;
+    int *paz;
     int egz;
     float gal;
     float med;
 };
 
-void vid(stud& s, int size)
+float vid(int * pazymiai, int pazkiek)
 {
-    float pazymiu_suma = accumulate(s.paz, s.paz+size, 0);
-    float pazymiu_vidurkis = pazymiu_suma / size;
-    s.gal = 0.4 * pazymiu_vidurkis + 0.6 * s.egz;
+    float pazymiu_suma = accumulate(pazymiai, pazymiai + pazkiek, 0);
+    float pazymiu_vidurkis = pazymiu_suma / pazkiek;
+    return pazymiu_vidurkis;
 }
-
-void med(stud& s, int size)
+float med(int *pazymiai, int pazkiek) //funkcija skaiciuojanti mediana
 {
-    sort(s.paz, s.paz+size);
+    sort(pazymiai, pazymiai+pazkiek);
+
     float mediana;
-    if (size % 2 == 0)
+
+    if (pazkiek == 0)
     {
-        mediana = (s.paz[(size - 1) / 2] + s.paz[size / 2]) / 2.0;
+        mediana = 0;
+    }
+    else if (pazkiek % 2 == 0)
+    {
+        mediana = (pazymiai[pazkiek / 2] + pazymiai[pazkiek / 2 - 1]) / 2.0;
     }
     else
     {
-        mediana = s.paz[size / 2];
+        mediana = pazymiai[(pazkiek - 1) / 2];
     }
-    s.med = 0.4 * mediana + 0.6 * s.egz;
+    return mediana;
 }
 
 int randompaz()
@@ -39,65 +44,72 @@ int randompaz()
     return dist(mt);
 }
 
-void autopaz(stud S[], int i, int pazkiek)
+void autopaz(stud *& s, int i, int pazkiek)
 {
-    S[i].egz = randompaz();
+    s[i].egz = randompaz();
+    s[i].paz = new int[pazkiek];
     for (int j = 0; j < pazkiek; j++)
     {
-        S[i].paz[j] == randompaz();
+        s[i].paz[j] = randompaz();
     }
-    vid(S[i],pazkiek);
-    med(S[i],pazkiek);
+    s[i].gal = 0.4 * vid(s[i].paz, pazkiek) + s[i].egz * 0.6;
+    s[i].med = 0.4 * med(s[i].paz, pazkiek) + s[i].egz * 0.6;
 }
-void input(stud S[], int i)
+void input(stud *& s, int i)
 {
-    int temp;
-    cout << "Iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
-    cin >> temp;
-    int size = 0;
-    while (temp != -1) {
-        S[i].paz[size] = temp;
-        size++;
-        cin >> temp;
+    int size = 1, pazymys;
+    s[i].paz = new int[size];
+    cout << "iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
+    cin >> pazymys;
+    while (pazymys != -1) {
+        s[i].paz[size-1] = pazymys;
+        size_t newSize = size + 1;
+        int* newPaz = new int[newSize];
+        memcpy(newPaz, s[i].paz, size * sizeof(int));
+        size = newSize;
+        delete[] s[i].paz;
+        s[i].paz = newPaz;
+        cin >> pazymys;
     }
     do {
-        cout << "Iveskite studento EGZ:\n";
-        cin >> S[i].egz;
-    } while (S[i].egz < 0 || S[i].egz > 10);
-    vid(S[i],size);
-    med(S[i],size);
+        cout << "iveskite studento egz:\n";
+        cin >> pazymys;
+    } while (pazymys < 0 || pazymys > 10);
+    s[i].egz = pazymys;
+    s[i].gal = 0.4 * vid(s[i].paz, size-1) + s[i].egz * 0.6;
+    s[i].med = 0.4 * med(s[i].paz, size-1) + s[i].egz * 0.6;
 }
 bool has_digit(string s)
 {
     return (s.find_first_of("0123456789") != string::npos);
 }
-void name_input(stud S[], int i)
+void name_input(stud *& s, int i)
 {
-    cout << "Iveskite studento nr. " << i + 1 << " duomenis:\n";
+    cout << "iveskite studento nr. " << i + 1 << " duomenis:\n";
     do {
-        cout << "Iveskite studento nr. " << i + 1 << " VARDA:\n";
-        cin >> S[i].Vard;
-    } while (S[i].Vard.length() < 0 || S[i].Vard.length() > 25 || has_digit(S[i].Vard));
+        cout << "iveskite studento nr. " << i + 1 << " varda:\n";
+        cin >> s[i].vard;
+    } while (s[i].vard.length() < 0 || s[i].vard.length() > 25 || has_digit(s[i].vard));
     do {
-        cout << "Iveskite studento nr. " << i + 1 << " PAV:\n";
-        cin >> S[i].Pav;
-    } while (S[i].Pav.length() < 0 && S[i].Pav.length() > 25 || has_digit(S[i].Pav));
+        cout << "iveskite studento nr. " << i + 1 << " pav:\n";
+        cin >> s[i].pav;
+    } while (s[i].pav.length() < 0 && s[i].pav.length() > 25 || has_digit(s[i].pav));
     cout << endl;
 }
-void print_student(stud S[], int studentu_sk) //atspausdina rezultatus
+void print_student(stud * s, int studentu_sk) //atspausdina rezultatus
 {
     cout << "\n\n";
-    cout << setw(20) << left << "Vardas"
-        << setw(20) << left << "Pavarde"
-        << setw(18) << left << "Galutinis(vid.)/"
-        << left << "Galutinis(med.)\n"
+    cout << setw(20) << left << "vardas"
+        << setw(20) << left << "pavarde"
+        << setw(18) << left << "galutinis(vid.)/"
+        << left << "galutinis(med.)\n"
         << "--------------------------------------------------------------------------\n";
     for (int i = 0; i < studentu_sk; i++)
     {
-        cout << setw(20) << left << S[i].Vard
-            << setw(20) << left << S[i].Pav
-            << setw(18) << left << S[i].gal
-            << left << S[i].med << endl;
+        cout << setw(20) << left << s[i].vard
+            << setw(20) << left << s[i].pav
+            << setw(18) << left << s[i].gal
+            << left << s[i].med << endl;
     }
     cout << "\n\n";
 }
@@ -108,13 +120,14 @@ int main()
     string temp;
     do
     {
-        cout << "Iveskite studentu kieki:\n";
+        cout << "iveskite studentu kieki:\n";
         cin >> studentu_sk;
     } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
-    stud S[25];
+    stud* s = new stud[studentu_sk];
+    
     do
     {
-        cout << "Jeigu norite, kad studentu pazymiai butu suvesti automatiskai - SPAUSKITE \"R\"\n Jeigu norite suvesti duomenis patys - RASYKITE \"P\"\n";
+        cout << "jeigu norite, kad studentu pazymiai butu suvesti automatiskai - spauskite \"r\"\n jeigu norite suvesti duomenis patys - rasykite \"p\"\n";
         cin >> temp;
         if (temp != "r" && temp != "R" && temp != "p" && temp != "P") {
             cout << "pakartokite, netinkamas simbolis\n";
@@ -122,16 +135,16 @@ int main()
     } while (temp != "r" && temp != "R" && temp != "p" && temp != "P");
     for (int i = 0; i < studentu_sk; i++)
     {
-        name_input(S, i);
+        name_input(s, i);
         if (temp == "p" || temp == "P") {
-            input(S, i);
+            input(s, i);
         }
         else {
-            autopaz(S, i, 5);
+            autopaz(s, i, 5);
         }
     }
-    
-    print_student(S, studentu_sk);
+
+    print_student(s, studentu_sk);
     system("pause");
     return 0;
 }

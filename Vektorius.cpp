@@ -12,8 +12,8 @@ struct stud {
 
 float vid(vector<int> paz)
 {
-    int pazymiu_suma = accumulate(paz.begin(), paz.end(), 0);
-    int pazymiu_vidurkis = pazymiu_suma / paz.size();
+    float pazymiu_suma = accumulate(paz.begin(), paz.end(), 0);
+	  float pazymiu_vidurkis = pazymiu_suma / paz.size();
     return pazymiu_vidurkis;
 }
 float med(vector<int> paz) //funkcija skaiciuojanti mediana

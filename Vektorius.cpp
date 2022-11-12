@@ -3,7 +3,7 @@
 using namespace std;
 
 struct stud {
-    string Vard, Pav;
+    string vard, pav;
     vector<int> paz;
     int egz;
     float gal;
@@ -43,64 +43,64 @@ int randompaz()
     uniform_int_distribution<int> dist(1, 10);
     return dist(mt);
 }
-void autopaz(vector<stud> S, int i, int pazkiek)
+void autopaz(vector<stud>& s, int i, int pazkiek)
 {
-    S.at(i).egz = randompaz();
+    s.at(i).egz = randompaz();
     for (int j = 0; j < pazkiek; j++)
     {
-        S.at(i).paz.push_back(randompaz());
+        s.at(i).paz.push_back(randompaz());
     }
-    S.at(i).gal = vid(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
-    S.at(i).med = med(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
+    s.at(i).gal = vid(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
+    s.at(i).med = med(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
 }
-void input(vector<stud>& S, int i)
+void input(vector<stud>& s, int i)
 {
     int temp, egz;
-    cout << "Iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
+    cout << "iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
     cin >> temp;
     while (temp != -1) {
-        S.at(i).paz.push_back(temp);
+        s.at(i).paz.push_back(temp);
         cin >> temp;
     }
     do {
-        cout << "Iveskite studento EGZ:\n";
+        cout << "iveskite studento egz:\n";
         cin >> egz;
-        S.at(i).egz = egz;
+        s.at(i).egz = egz;
     } while (egz < 0 || egz > 10);
-    S.at(i).gal = vid(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
-    S.at(i).med = med(S.at(i).paz) * 0.6 + S.at(i).egz * 0.4;
+    s.at(i).gal = vid(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
+    s.at(i).med = med(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
 }
 bool has_digit(string s)
 {
     return (s.find_first_of("0123456789") != string::npos);
 }
-void name_input(vector<stud>& S, int i)
+void name_input(vector<stud>& s, int i)
 {
-    cout << "Iveskite studento nr. " << i + 1 << " duomenis:\n";
+    cout << "iveskite studento nr. " << i + 1 << " duomenis:\n";
     do {
-        cout << "Iveskite studento nr. " << i + 1 << " VARDA:\n";
-        cin >> S.at(i).Vard;
-    } while (S.at(i).Vard.length() < 0 || S.at(i).Vard.length() > 25 || has_digit(S.at(i).Vard));
+        cout << "iveskite studento nr. " << i + 1 << " varda:\n";
+        cin >> s.at(i).vard;
+    } while (s.at(i).vard.length() < 0 || s.at(i).vard.length() > 25 || has_digit(s.at(i).vard));
     do {
-        cout << "Iveskite studento nr. " << i + 1 << " PAV:\n";
-        cin >> S.at(i).Pav;
-    } while (S.at(i).Pav.length() < 0 && S.at(i).Pav.length() > 25 || has_digit(S.at(i).Pav));
+        cout << "iveskite studento nr. " << i + 1 << " pav:\n";
+        cin >> s.at(i).pav;
+    } while (s.at(i).pav.length() < 0 && s.at(i).pav.length() > 25 || has_digit(s.at(i).pav));
     cout << endl;
 }
-void print_student(vector<stud> S, int studentu_sk) //atspausdina rezultatus
+void print_student(vector<stud> s, int studentu_sk) //atspausdina rezultatus
 {
     cout << "\n\n";
-    cout << setw(20) << left << "Vardas"
-        << setw(20) << left << "Pavarde"
-        << setw(18) << left << "Galutinis(vid.)/"
-        << left << "Galutinis(med.)\n"
+    cout << setw(20) << left << "vardas"
+        << setw(20) << left << "pavarde"
+        << setw(18) << left << "galutinis(vid.)/"
+        << left << "galutinis(med.)\n"
         << "--------------------------------------------------------------------------\n";
     for (int i = 0; i < studentu_sk; i++)
     {
-        cout << setw(20) << left << S.at(i).Vard
-            << setw(20) << left << S.at(i).Pav
-            << setw(18) << left << S.at(i).gal
-            << left << S.at(i).med << endl;
+        cout << setw(20) << left << s.at(i).vard
+            << setw(20) << left << s.at(i).pav
+            << setw(18) << left << s.at(i).gal
+            << left << s.at(i).med << endl;
     }
     cout << "\n\n";
 }
@@ -111,14 +111,14 @@ int main()
     string temp;
     do
     {
-        cout << "Iveskite studentu kieki:\n";
+        cout << "iveskite studentu kieki:\n";
         cin >> studentu_sk;
     } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
-    vector<stud> S;
-    S.resize(S.size() + studentu_sk);
+    vector<stud> s;
+    s.resize(s.size() + studentu_sk);
     do
     {
-        cout << "Jeigu norite, kad studentu pazymiai butu suvesti automatiskai - SPAUSKITE \"R\"\n Jeigu norite suvesti duomenis patys - RASYKITE \"P\"\n";
+        cout << "jeigu norite, kad studentu pazymiai butu suvesti automatiskai - spauskite \"r\"\n jeigu norite suvesti duomenis patys - rasykite \"p\"\n";
         cin >> temp;
         if (temp != "r" && temp != "R" && temp != "p" && temp != "P") {
             cout << "pakartokite, netinkamas simbolis\n";
@@ -126,15 +126,15 @@ int main()
     } while (temp != "r" && temp != "R" && temp != "p" && temp != "P");
     for (int i = 0; i < studentu_sk; i++)
     {
-        name_input(S, i);
+        name_input(s, i);
         if (temp == "p" || temp == "P") {
-            input(S, i);
+            input(s, i);
         }
         else {
-            autopaz(S, i, 5);
+            autopaz(s, i, 5);
         }  
     }
-    print_student(S, studentu_sk);
+    print_student(s, studentu_sk);
     system("pause");
     return 0;
 }

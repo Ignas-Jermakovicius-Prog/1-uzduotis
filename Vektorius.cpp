@@ -50,8 +50,8 @@ void autopaz(vector<stud>& s, int i, int pazkiek)
     {
         s.at(i).paz.push_back(randompaz());
     }
-    s.at(i).gal = vid(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
-    s.at(i).med = med(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
+    s.at(i).gal = vid(s.at(i).paz) * 0.4 + s.at(i).egz * 0.6;
+    s.at(i).med = med(s.at(i).paz) * 0.4 + s.at(i).egz * 0.6;
 }
 void input(vector<stud>& s, int i)
 {
@@ -67,8 +67,8 @@ void input(vector<stud>& s, int i)
         cin >> egz;
         s.at(i).egz = egz;
     } while (egz < 0 || egz > 10);
-    s.at(i).gal = vid(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
-    s.at(i).med = med(s.at(i).paz) * 0.6 + s.at(i).egz * 0.4;
+    s.at(i).gal = vid(s.at(i).paz) * 0.4 + s.at(i).egz * 0.6;
+    s.at(i).med = med(s.at(i).paz) * 0.4 + s.at(i).egz * 0.6;
 }
 bool has_digit(string s)
 {

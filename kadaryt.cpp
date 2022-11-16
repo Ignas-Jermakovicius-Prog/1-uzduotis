@@ -24,9 +24,9 @@ void kadaryt(string raide)
 		for (int i = 0; i < int(failsk) - 48; i++)
 		{
 			failogeneravimas(kiek);
-			auto startviso = chrono::high_resolution_clock::now();
 			vector<stud> studentai;
 			int pazskc;
+			auto startviso = chrono::high_resolution_clock::now();
 			skaitymas(studentai, "studentai" + to_string(kiek) + ".txt", &pazskc);
 
 			auto startsort = high_resolution_clock::now();
@@ -35,16 +35,13 @@ void kadaryt(string raide)
 			duration<double> diffsort = endsort - startsort;
 			cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
 
-			auto start = high_resolution_clock::now();
-
 			vector<stud> talentai;
 			vector<stud> nuskriaustieji;
 
+			auto start = high_resolution_clock::now();
+
 			for (int i = 0; i < studentai.size(); i++)
 			{
-				studentai[i].gal = 0.4 * vid(studentai[i].paz) + 0.6 * studentai[i].egz;
-				studentai[i].med = 0.4 * med(studentai[i].paz) + 0.6 * studentai[i].egz;
-
 				if (studentai[i].gal >= 5)
 					talentai.push_back(studentai[i]);
 				else
@@ -81,16 +78,13 @@ void kadaryt(string raide)
 		duration<double> diffsort = endsort - startsort;
 		cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
 
-		auto start = high_resolution_clock::now();
-
 		vector<stud> talentai;
 		vector<stud> nuskriaustieji;
 
+		auto start = high_resolution_clock::now();
+
 		for (int i = 0; i < studentai.size(); i++)
 		{
-			studentai[i].gal = 0.4 * vid(studentai[i].paz) + 0.6 * studentai[i].egz;
-			studentai[i].med = 0.4 * med(studentai[i].paz) + 0.6 * studentai[i].egz;
-
 			if (studentai[i].gal >= 5)
 				talentai.push_back(studentai[i]);
 			else
@@ -108,10 +102,9 @@ void kadaryt(string raide)
 		cout << "Testas su " << studentai.size() << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl;
 	}
 	else
-	{
+	{	
 		string tempc;
 		vector<stud> studentai;
-		int paz;
 		int studentu_sk;
 		do
 		{
@@ -119,24 +112,9 @@ void kadaryt(string raide)
 			cin >> studentu_sk;
 		} while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
 		studentai.resize(studentai.size() + studentu_sk);
-		do
-		{
-			cout << "jeigu norite, kad studentu pazymiai butu suvesti automatiskai - spauskite \"r\"\n jeigu norite suvesti duomenis patys - rasykite \"p\"\n";
-			cin >> tempc;
-			if (tempc != "r" && tempc != "R" && tempc != "p" && tempc != "P") {
-				cout << "pakartokite, netinkamas simbolis\n";
-			}
-		} while (tempc != "r" && tempc != "R" && tempc != "p" && tempc != "P");
 		for (int i = 0; i < studentu_sk; i++)
 		{
-			name_input(studentai, i);
-			if (tempc == "p" || tempc == "P") {
-				input(studentai, i);
-			}
-			else {
-				autopaz(studentai, i, 5);
-			}
-			paz = studentai.at(i).paz.size();
+			input(studentai, i);
 		}
 		auto startviso = chrono::high_resolution_clock::now();
 
@@ -146,16 +124,13 @@ void kadaryt(string raide)
 		duration<double> diffsort = endsort - startsort;
 		cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
 
-		auto start = high_resolution_clock::now();
-
 		vector<stud> talentai;
 		vector<stud> nuskriaustieji;
 
+		auto start = high_resolution_clock::now();
+
 		for (int i = 0; i < studentai.size(); i++)
 		{
-			studentai[i].gal = 0.4 * vid(studentai[i].paz) + 0.6 * studentai[i].egz;
-			studentai[i].med = 0.4 * med(studentai[i].paz) + 0.6 * studentai[i].egz;
-
 			if (studentai[i].gal >= 5)
 				talentai.push_back(studentai[i]);
 			else

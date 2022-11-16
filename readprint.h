@@ -12,10 +12,8 @@
 using namespace std;
 
 int randompaz();
-void autopaz(vector<stud>& S, int i, int pazkiek);
-void input(vector<stud>& S, int i);
 bool has_digit(string s);
-void name_input(vector<stud>& S, int i);
+void input(vector<stud>& S, int i);
 void readFile(vector<stud>& S, int* pazkiek);
 bool compare(const stud& a, const stud& b);
 void printStudent(vector<stud> S, int pazkiek);

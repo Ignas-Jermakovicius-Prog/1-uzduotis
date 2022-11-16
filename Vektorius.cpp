@@ -43,10 +43,6 @@ int randompaz()
     uniform_int_distribution<int> dist(1, 10);
     return dist(mt);
 }
-void autopaz(vector<stud>& S, int i, int pazkiek)
-{
-   
-}
 
 bool has_digit(string s)
 {
@@ -103,10 +99,6 @@ void input(vector<stud>& S, int i)
     }
 }
 
-void name_input(vector<stud>& s, int i)
-{
-    
-}
 void print_student(vector<stud> s, int studentu_sk) //atspausdina rezultatus
 {
     cout << "\n\n";

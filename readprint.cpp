@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -16,38 +16,13 @@ int randompaz()
     uniform_int_distribution<int> dist(1, 10);
     return dist(mt);
 }
-void autopaz(vector<stud>& S, int i, int pazkiek)
-{
-    S.at(i).egz = randompaz();
-    for (int j = 0; j < pazkiek; j++)
-    {
-        S.at(i).paz.push_back(randompaz());
-    }
-    S.at(i).gal = vid(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
-    S.at(i).med = med(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
-}
-void input(vector<stud>& S, int i)
-{
-    int temp, egz;
-    cout << "iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
-    cin >> temp;
-    while (temp != -1) {
-        S.at(i).paz.push_back(temp);
-        cin >> temp;
-    }
-    do {
-        cout << "iveskite studento egz:\n";
-        cin >> egz;
-        S.at(i).egz = egz;
-    } while (egz < 0 || egz > 10);
-    S.at(i).gal = vid(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
-    S.at(i).med = med(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
-}
+
 bool has_digit(string s)
 {
     return (s.find_first_of("0123456789") != string::npos);
 }
-void name_input(vector<stud>& S, int i)
+
+void input(vector<stud>& S, int i)
 {
     cout << "iveskite studento nr. " << i + 1 << " duomenis:\n";
     do {
@@ -59,6 +34,42 @@ void name_input(vector<stud>& S, int i)
         cin >> S.at(i).Pav;
     } while (S.at(i).Pav.length() < 0 && S.at(i).Pav.length() > 25 || has_digit(S.at(i).Pav));
     cout << endl;
+    string temp;
+    do
+    {
+        cout << "jeigu norite, kad studento pazymiai butu suvesti automatiskai - spauskite \"r\"\n jeigu norite suvesti duomenis patys - rasykite \"p\"\n";
+        cin >> temp;
+        if (temp != "r" && temp != "R" && temp != "p" && temp != "P") {
+            cout << "pakartokite, netinkamas simbolis\n";
+        }
+    } while (temp != "r" && temp != "R" && temp != "p" && temp != "P");
+    if (temp == "p" || temp == "P")
+    {
+        int temps, egz;
+        cout << "iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
+        cin >> temps;
+        while (temps != -1) {
+            S.at(i).paz.push_back(temps);
+            cin >> temps;
+        }
+        do {
+            cout << "iveskite studento egz:\n";
+            cin >> egz;
+            S.at(i).egz = egz;
+        } while (egz < 0 || egz > 10);
+        S.at(i).gal = vid(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
+        S.at(i).med = med(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
+    }
+    else
+    {
+        S.at(i).egz = randompaz();
+        for (int j = 0; j < 5; j++)
+        {
+            S.at(i).paz.push_back(randompaz());
+        }
+        S.at(i).gal = vid(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
+        S.at(i).med = med(S.at(i).paz) * 0.4 + S.at(i).egz * 0.6;
+    }
 }
 
 void readFile(vector<stud>& S, int* paz) // failo nuskaitymo funkcija
@@ -120,23 +131,9 @@ void readFile(vector<stud>& S, int* paz) // failo nuskaitymo funkcija
                 cin >> studentu_sk;
             } while (int(studentu_sk) < 0 || int(studentu_sk) > 256);
             S.resize(S.size() + studentu_sk);
-            do
-            {
-                cout << "jeigu norite, kad studentu pazymiai butu suvesti automatiskai - spauskite \"r\"\n jeigu norite suvesti duomenis patys - rasykite \"p\"\n";
-                cin >> tempc;
-                if (tempc != "r" && tempc != "R" && tempc != "p" && tempc != "P") {
-                    cout << "pakartokite, netinkamas simbolis\n";
-                }
-            } while (tempc != "r" && tempc != "R" && tempc != "p" && tempc != "P");
             for (int i = 0; i < studentu_sk; i++)
             {
-                name_input(S, i);
-                if (tempc == "p" || tempc == "P") {
-                    input(S, i);
-                }
-                else {
-                    autopaz(S, i, 5);
-                }
+                input(S, i);
                 *paz = S.at(i).paz.size();
             }
         }

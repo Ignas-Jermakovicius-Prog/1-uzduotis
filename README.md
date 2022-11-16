@@ -3,10 +3,6 @@ Testavimo sistemos parametrai: CPU: AMD Ryzen 7 5800H with Radeon Graphics @ 3.2
 
 Duomenų nuskaitymas iš failų:
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
 
 |       |       1000 |     10000 |   100000 |  1000000 | 10000000 |
 |   --- |        --- |      ---  |     ---  |    ---   |    ---   |

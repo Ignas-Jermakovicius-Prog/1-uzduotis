@@ -133,7 +133,9 @@ void inputlist(list<stud>& S, int i)
 
 bool compare(const stud& a, const stud& b)
 {
-	if (a.Vard != b.Vard)
+	if (a.gal != b.gal)
+		return a.gal > b.gal;
+	else if (a.Vard != b.Vard)
 		return a.Vard < b.Vard;
 	else
 		return a.Pav < b.Pav;
@@ -177,7 +179,6 @@ void skaitymas(vector<stud>& S, string failopavadinimas, int* kiek)
 
 	int studentas = 0;
 	int temp;
-
 	string buff;
 	ifstream r;
 	try {
@@ -226,7 +227,6 @@ void skaitymaslist(list<stud>& S, string failopavadinimas, int* kiek)
 	auto start = chrono::high_resolution_clock::now();
 
 	int temp;
-
 	string buff;
 	ifstream r;
 	try {
@@ -270,9 +270,9 @@ void skaitymaslist(list<stud>& S, string failopavadinimas, int* kiek)
 
 void isvedimas(string failo_pavadinimas, vector<stud> S)
 {
-	ofstream stud_failas(failo_pavadinimas);
-
 	auto matavimo_pradzia = high_resolution_clock::now();
+
+	ofstream stud_failas(failo_pavadinimas);
 
 	stud_failas << left << setw(25) << "Vardas" << setw(25) << "Pavarde" << setw(15) << "Gal.(vid)" << setw(15) << "Gal.(med)" << endl;
 
@@ -292,10 +292,10 @@ void isvedimas(string failo_pavadinimas, vector<stud> S)
 
 void isvedimaslist(string failo_pavadinimas, list<stud> S)
 {
+	auto matavimo_pradzia = high_resolution_clock::now();
+
 	ofstream stud_failas(failo_pavadinimas);
 	list<stud>::iterator it;
-
-	auto matavimo_pradzia = high_resolution_clock::now();
 
 	stud_failas << left << setw(25) << "Vardas" << setw(25) << "Pavarde" << setw(15) << "Gal.(vid)" << setw(15) << "Gal.(med)" << endl;
 

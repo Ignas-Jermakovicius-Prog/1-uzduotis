@@ -28,12 +28,7 @@ void kadarytvek(string raide)
 			int pazskc;
 			auto startviso = chrono::high_resolution_clock::now();
 			skaitymas(studentai, "studentai" + to_string(kiek) + ".txt", &pazskc);
-
-			auto startsort = high_resolution_clock::now();
 			sort(studentai.begin(), studentai.end(), compare);
-			auto endsort = high_resolution_clock::now();
-			duration<double> diffsort = endsort - startsort;
-			cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
 
 			vector<stud> talentai;
 			vector<stud> nuskriaustieji;
@@ -71,12 +66,7 @@ void kadarytvek(string raide)
 		skaitymas(studentai, failas + ".txt", &pazskc);
 		if (studentai.size() == 0)
 			return;
-
-		auto startsort = high_resolution_clock::now();
 		sort(studentai.begin(), studentai.end(), compare);
-		auto endsort = high_resolution_clock::now();
-		duration<double> diffsort = endsort - startsort;
-		cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
 
 		vector<stud> talentai;
 		vector<stud> nuskriaustieji;
@@ -116,13 +106,9 @@ void kadarytvek(string raide)
 		{
 			input(studentai, i);
 		}
-		auto startviso = chrono::high_resolution_clock::now();
-
-		auto startsort = high_resolution_clock::now();
 		sort(studentai.begin(), studentai.end(), compare);
-		auto endsort = high_resolution_clock::now();
-		duration<double> diffsort = endsort - startsort;
-		cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
+
+		auto startviso = chrono::high_resolution_clock::now();
 
 		vector<stud> talentai;
 		vector<stud> nuskriaustieji;

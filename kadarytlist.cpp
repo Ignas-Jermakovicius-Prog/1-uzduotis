@@ -28,12 +28,7 @@ void kadarytlist(string raide)
 			int pazskc;
 			auto startviso = chrono::high_resolution_clock::now();
 			skaitymaslist(studentai, "studentai" + to_string(kiek) + ".txt", &pazskc);
-
-			auto startsort = high_resolution_clock::now();
 			studentai.sort(compare);
-			auto endsort = high_resolution_clock::now();
-			duration<double> diffsort = endsort - startsort;
-			cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
 
 			list<stud> talentai;
 			list<stud> nuskriaustieji;
@@ -73,12 +68,7 @@ void kadarytlist(string raide)
 		skaitymaslist(studentai, failas + ".txt", &pazskc);
 		if (studentai.size() == 0)
 			return;
-
-		auto startsort = high_resolution_clock::now();
 		studentai.sort(compare);
-		auto endsort = high_resolution_clock::now();
-		duration<double> diffsort = endsort - startsort;
-		cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
 
 		list<stud> talentai;
 		list<stud> nuskriaustieji;
@@ -118,13 +108,9 @@ void kadarytlist(string raide)
 		{
 			inputlist(studentai, i);
 		}
-		auto startviso = chrono::high_resolution_clock::now();
-
-		auto startsort = high_resolution_clock::now();
 		studentai.sort(compare);
-		auto endsort = high_resolution_clock::now();
-		duration<double> diffsort = endsort - startsort;
-		cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
+
+		auto startviso = chrono::high_resolution_clock::now();
 
 		list<stud> talentai;
 		list<stud> nuskriaustieji;

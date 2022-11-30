@@ -16,16 +16,21 @@ void kadarytabiem(string raide)
 		cin >> failas;
 
 		skaitymas(studentai, failas + ".txt", &pazskc);
+		if (studentai.size() == 0)
+			return;
+		sort(studentai.begin(), studentai.end(), compare);
+
 		skaitymaslist(studentail, failas + ".txt", &pazskc);
 		if (studentail.size() == 0)
 			return;
+		studentail.sort(compare);
+		
 
 		vector<stud> talentai;
 		vector<stud> nuskriaustieji;
 
 		auto startvek = high_resolution_clock::now();
 
-		sort(studentai.begin(), studentai.end(), compare);
 		for (int i = 0; i < studentai.size(); i++)
 		{
 			if (studentai[i].gal >= 5)
@@ -43,7 +48,6 @@ void kadarytabiem(string raide)
 
 		auto startlist = high_resolution_clock::now();
 
-		studentail.sort(compare);
 		for (it = studentail.begin(); it != studentail.end(); it++)
 		{
 			if ((*it).gal >= 5)
@@ -72,13 +76,9 @@ void kadarytabiem(string raide)
 		{
 			inputlist(studentai, i);
 		}
-		auto startviso = chrono::high_resolution_clock::now();
-
-		auto startsort = high_resolution_clock::now();
 		studentai.sort(compare);
-		auto endsort = high_resolution_clock::now();
-		duration<double> diffsort = endsort - startsort;
-		cout << studentai.size() << " studentu rusiavimas didejimo tvarka laikas : " << diffsort.count() << "s\n";
+
+		auto startviso = chrono::high_resolution_clock::now();
 
 		list<stud> talentai;
 		list<stud> nuskriaustieji;

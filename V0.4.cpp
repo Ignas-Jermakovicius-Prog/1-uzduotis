@@ -19,24 +19,41 @@ int main()
 			cout << "pakartokite, netinkamas simbolis\n";
 		}
 	} while (raide != "r" && raide != "R" && raide != "F" && raide != "f" && raide != "p" && raide != "P");
-	if (raide == "r" || raide == "R" || raide == "F" || raide == "f")
+	if (raide == "F" || raide == "f")
 	{
 		string kont;
 		cout << "Jeigu testui norite naudoti list konteineri,rasykite \"l\"\nJeigu testui norite naudoti vector konteineri- rasykite \"v\"\nJeigu norite palyginti list ir vector veikimo sparta - rasykite \"b\"\n";
 		do
 		{
 			cin >> kont;
-			if (kont != "l" && kont != "L" && kont != "v" && kont != "V" && kont != "b" && raide != "B")
+			if (kont != "l" && kont != "L" && kont != "v" && kont != "V" && kont != "b" && kont != "B")
 			{
 				cout << "pakartokite, netinkamas simbolis\n";
 			}
-		} while (kont != "l" && kont != "L" && kont != "v" && kont != "V" && kont != "b" && raide != "B");
+		} while (kont != "l" && kont != "L" && kont != "v" && kont != "V" && kont != "b" && kont != "B");
 		if (kont == "l" || kont == "L")
 			kadarytlist(raide);
 		else if (kont == "v" || kont == "V")
 			kadarytvek(raide);
 		else
 			kadarytabiem(raide);
+	}
+	else if (raide == "r" || raide == "R")
+	{
+		string kont;
+		cout << "Jeigu generavimui norite naudoti list konteineri,rasykite \"l\"\nJeigu generavimui norite naudoti vector konteineri- rasykite \"v\"\n";
+		do
+		{
+			cin >> kont;
+			if (kont != "l" && kont != "L" && kont != "v" && kont != "V")
+			{
+				cout << "pakartokite, netinkamas simbolis\n";
+			}
+		} while (kont != "l" && kont != "L" && kont != "v" && kont != "V");
+		if (kont == "l" || kont == "L")
+			kadarytlist(raide);
+		else
+			kadarytvek(raide);
 	}
 	else
 		kadarytabiem(raide);

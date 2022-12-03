@@ -154,6 +154,6 @@ void kadarytlist(string raide, int strategija)
 		}
 		auto endviso = high_resolution_clock::now();
 		duration<double> diffviso = endviso - startviso;
-		cout << "Testas su " << studentai.size() << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
+		cout << "Testas su " << a << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
 	}
 }

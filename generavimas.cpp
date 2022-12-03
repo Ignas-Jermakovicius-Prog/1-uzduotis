@@ -311,16 +311,18 @@ void studgruplist1(list<stud>& studentai, list<stud>& nuskriaustieji, list<stud>
 void studgrupvek2(vector<stud>& studentai, vector<stud>& nuskriaustieji)
 {
 	auto start = high_resolution_clock::now();
-	vector<stud>::iterator it = studentai.begin();
-	while(it != studentai.end())
+	vector<stud>::iterator it = studentai.end();
+	--it;
+	while(it >= studentai.begin())
 	{
 		if (kuriame(*it))
 		{
 			nuskriaustieji.push_back(*it);
 			it = studentai.erase(it);
+			--it;
 		}
 		else
-			++it;
+			--it;
 	}
 	auto end = high_resolution_clock::now();
 	duration<double> diff = end - start;

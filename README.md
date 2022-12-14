@@ -3,6 +3,11 @@
 V0.1
 V0.1 versijoje pirmiausia yra nuskaitomi įvesti studento duomenys(vardas, pavardė), tada yra galimybė generuoti atsitiktinius studento pažymius, ar įvesti studento pažymius patiems. Galiausiai atspausdinami rezultatai su studento galutiniais balais (apskaičiuota pagal vidurkį ir medianą). Programa realizuota dviem būdais, kai namų darbų rezultatai ir visi studentai saugomi į: 1) tradicinį dinaminį C masyvą. 2) std::vector tipo konteinerį.
 
+
+V0.3
+Iš pirmo programa reikalauja pasirinkti testo būdą, t.y. 1) ar norime sugeneruoti studentų failus su šabloniškais vardais ir atsitiktiniais pažymiais 2) ar norime nuskaityti studentų duomenis iš failo 3) ar norime studentų duomenis įvesti ranka . 1) testu (po generavimo) ir 2) testu failas yra nuskaitomas, o poto visais testais studentai yra surūšiuoti į dvi grupes - talentus ir nuskriaustuosius. Šios dvi studentų grupės tada yra įrašomos į du atskirus .txt failus. Pamatuota failo sukurimo trukmė. Atlikta greičio analizė (rasta vykdymo trukmė atskirų programos dalių): .txt failo su studentais nuskaitymo, studentų rūšiavimo į dvi grupes, studentų įrašimo į nuskriaustųjų bei talentų failus, viso testo atlikimo laikas. Kiekvieno žingsnio atlikimo trukmė yra aprašoma programos vykdymo metu.
+
+
 V0.4
 Testavimo sistemos parametrai: CPU: AMD Ryzen 7 5800H with Radeon Graphics @ 3.20 GHz, RAM: 16.0 GB, SSD: 476GB
 

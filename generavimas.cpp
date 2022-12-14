@@ -12,7 +12,6 @@ int countWords(string const& str)
 	return std::distance(istream_iterator<string>(stream), istream_iterator<string>());
 }
 
-
 int randompaz()
 {
 	mt19937 mt(static_cast<long unsigned int>(high_resolution_clock::now().time_since_epoch().count()));
@@ -179,6 +178,7 @@ void skaitymas(vector<stud>& S, string failopavadinimas, int* kiek)
 
 	int studentas = 0;
 	int temp;
+
 	string buff;
 	ifstream r;
 	try {
@@ -210,7 +210,7 @@ void skaitymas(vector<stud>& S, string failopavadinimas, int* kiek)
 		}
 		r.close();
 	}
-	catch (int e)
+	catch (int e) 
 	{
 		cout << "Failo tokiu pavadinimu nera.";
 		return;
@@ -264,6 +264,7 @@ void skaitymaslist(list<stud>& S, string failopavadinimas, int* kiek)
 	auto end = high_resolution_clock::now();
 	duration<double> diff = end - start;
 	cout << "Failo nuskaitymas su " + to_string(S.size()) + " studentu/-ais uztruko(list): " << diff.count() << "s\n";
+
 	if (S.size() == 0)
 		cout << "Negalima atidaryti failo arba jis tuscias." << endl;
 }
@@ -274,11 +275,13 @@ void isvedimas(string failo_pavadinimas, vector<stud> S)
 
 	ofstream stud_failas(failo_pavadinimas);
 
+
 	stud_failas << left << setw(25) << "Vardas" << setw(25) << "Pavarde" << setw(15) << "Gal.(vid)" << setw(15) << "Gal.(med)" << endl;
 
 	for (int i = 0; i < S.size(); i++)
 	{
 		stud laikstud = S[i];
+
 		stud_failas << left << setw(25) << laikstud.Vard << setw(25) << laikstud.Pav
 			<< setw(15) << setprecision(3) << laikstud.gal << setw(15) << setprecision(3) << laikstud.med << endl;
 	}
@@ -304,6 +307,7 @@ void isvedimaslist(string failo_pavadinimas, list<stud> S)
 		stud_failas << left << setw(25) << it->Vard << left << setw(25) << it->Pav
 			<< setw(15) << setprecision(3) << it->gal << setw(15) << setprecision(3) << it->med << endl;
 		it++;
+
 	}
 
 	stud_failas.close();

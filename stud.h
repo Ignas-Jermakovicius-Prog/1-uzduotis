@@ -8,4 +8,6 @@ struct stud {
     int egz;
     float gal;
     float med;
+
 };
+

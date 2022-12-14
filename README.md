@@ -1,4 +1,4 @@
-#V1.0
+
 Testavimo sistemos parametrai: CPU: AMD Ryzen 7 5800H with Radeon Graphics @ 3.20 GHz, RAM: 16.0 GB, SSD: 476GB
 
 Pirma strategija (dviejų naujų vektorių/listų sukūrimas):

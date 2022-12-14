@@ -8,6 +8,8 @@ struct stud {
     int egz;
     float gal;
     float med;
-
+    bool operator==(const struct stud& v) const {
+        return v.Vard == Vard && v.Pav == Pav && v.gal == gal;
+    }
 };
 

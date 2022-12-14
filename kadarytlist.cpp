@@ -4,7 +4,8 @@
 
 using namespace std;
 
-void kadarytlist(string raide)
+
+void kadarytlist(string raide, int strategija)
 {
 	if (raide == "r" || raide == "R")
 	{
@@ -28,27 +29,35 @@ void kadarytlist(string raide)
 			int pazskc;
 			auto startviso = chrono::high_resolution_clock::now();
 			skaitymaslist(studentai, "studentai" + to_string(kiek) + ".txt", &pazskc);
+			int a = studentai.size();
+
 			studentai.sort(compare);
 
-			list<stud> talentai;
-			list<stud> nuskriaustieji;
-			list<stud>::iterator it;
 
-			auto start = high_resolution_clock::now();
-
-			for (it = studentai.begin(); it != studentai.end(); it++)
+			if (strategija == 1)
 			{
-				if ((*it).gal >= 5)
-					talentai.push_back(*it);
-				else
-					nuskriaustieji.push_back(*it);
+				list<stud> talentai;
+				list<stud> nuskriaustieji;
+				studgruplist1(studentai, nuskriaustieji, talentai);
+				isvedimaslist("talentai" + to_string(a) + ".txt", talentai);
+				isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
 			}
-			auto end = high_resolution_clock::now();
-			duration<double> diff = end - start;
-			cout << "Studentu rusiavimas i 2 grupes uztruko : " << diff.count() << "s\n";
+		
+			else if (strategija == 2)
+			{
+				list<stud> nuskriaustieji;
+				studgruplist2(studentai, nuskriaustieji);
+				isvedimaslist("talentai" + to_string(a) + ".txt", studentai);
+				isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+			}
 
-			isvedimaslist("talentai" + to_string(kiek) + ".txt", talentai);
-			isvedimaslist("nuskriaustieji" + to_string(kiek) + ".txt", nuskriaustieji);
+			else
+			{
+				list<stud> nuskriaustieji;
+				studgruplistopt(studentai, nuskriaustieji);
+				isvedimaslist("talentai" + to_string(a) + ".txt", studentai);
+				isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+			}
 
 			auto endviso = high_resolution_clock::now();
 			duration<double> diffviso = endviso - startviso;
@@ -68,31 +77,38 @@ void kadarytlist(string raide)
 		skaitymaslist(studentai, failas + ".txt", &pazskc);
 		if (studentai.size() == 0)
 			return;
+    int a = studentai.size();
+
 		studentai.sort(compare);
 
-		list<stud> talentai;
-		list<stud> nuskriaustieji;
-		list<stud>::iterator it;
-
-		auto start = high_resolution_clock::now();
-
-		for (it = studentai.begin(); it != studentai.end(); it++)
+		if (strategija == 1)
 		{
-			if ((*it).gal >= 5)
-				talentai.push_back(*it);
-			else
-				nuskriaustieji.push_back(*it);
+			list<stud> talentai;
+			list<stud> nuskriaustieji;
+			studgruplist1(studentai, nuskriaustieji, talentai);
+			isvedimaslist("talentai" + to_string(a) + ".txt", talentai);
+			isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
 		}
-		auto end = high_resolution_clock::now();
-		duration<double> diff = end - start;
-		cout << "Studentu rusiavimas i 2 grupes uztruko : " << diff.count() << "s\n";
 
-		isvedimaslist("talentai" + to_string(studentai.size()) + ".txt", talentai);
-		isvedimaslist("nuskriaustieji" + to_string(studentai.size()) + ".txt", nuskriaustieji);
+		else if (strategija == 2)
+		{
+			list<stud> nuskriaustieji;
+			studgruplist2(studentai, nuskriaustieji);
+			isvedimaslist("talentai" + to_string(a) + ".txt", studentai);
+			isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
+
+		else
+		{
+			list<stud> nuskriaustieji;
+			studgruplistopt(studentai, nuskriaustieji);
+			isvedimaslist("talentai" + to_string(a) + ".txt", studentai);
+			isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
 
 		auto endviso = high_resolution_clock::now();
 		duration<double> diffviso = endviso - startviso;
-		cout << "Testas su " << studentai.size() << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
+		cout << "Testas su " << a << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
 	}
 	else
 	{
@@ -108,32 +124,37 @@ void kadarytlist(string raide)
 		{
 			inputlist(studentai, i);
 		}
+		int a = studentai.size();
+
 		studentai.sort(compare);
 
 		auto startviso = chrono::high_resolution_clock::now();
 
-		list<stud> talentai;
-		list<stud> nuskriaustieji;
-		list<stud>::iterator it;
-
-		auto start = high_resolution_clock::now();
-
-		for (it = studentai.begin(); it != studentai.end(); it++)
+		if (strategija == 1)
 		{
-			if ((*it).gal >= 5)
-				talentai.push_back(*it);
-			else
-				nuskriaustieji.push_back(*it);
+			list<stud> talentai;
+			list<stud> nuskriaustieji;
+			studgruplist1(studentai, nuskriaustieji, talentai);
+			isvedimaslist("talentai" + to_string(a) + ".txt", talentai);
+			isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
 		}
-		auto end = high_resolution_clock::now();
-		duration<double> diff = end - start;
-		cout << "Studentu rusiavimas i 2 grupes uztruko : " << diff.count() << "s\n";
 
-		isvedimaslist("talentai" + to_string(studentai.size()) + ".txt", talentai);
-		isvedimaslist("nuskriaustieji" + to_string(studentai.size()) + ".txt", nuskriaustieji);
-
+		else if (strategija == 2)
+		{
+			list<stud> nuskriaustieji;
+			studgruplist2(studentai, nuskriaustieji);
+			isvedimaslist("talentai" + to_string(a) + ".txt", studentai);
+			isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
+		else
+		{
+			list<stud> nuskriaustieji;
+			studgruplistopt(studentai, nuskriaustieji);
+			isvedimaslist("talentai" + to_string(a) + ".txt", studentai);
+			isvedimaslist("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
 		auto endviso = high_resolution_clock::now();
 		duration<double> diffviso = endviso - startviso;
-		cout << "Testas su " << studentai.size() << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
+		cout << "Testas su " << a << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
 	}
 }

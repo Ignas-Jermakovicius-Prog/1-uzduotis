@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void kadarytvek(string raide)
+void kadarytvek(string raide, int strategija)
 {
 	if (raide == "r" || raide == "R")
 	{
@@ -28,26 +28,35 @@ void kadarytvek(string raide)
 			int pazskc;
 			auto startviso = chrono::high_resolution_clock::now();
 			skaitymas(studentai, "studentai" + to_string(kiek) + ".txt", &pazskc);
+			int a = studentai.size();
+
 			sort(studentai.begin(), studentai.end(), compare);
 
-			vector<stud> talentai;
-			vector<stud> nuskriaustieji;
-
-			auto start = high_resolution_clock::now();
-
-			for (int i = 0; i < studentai.size(); i++)
+			if (strategija == 1)
 			{
-				if (studentai[i].gal >= 5)
-					talentai.push_back(studentai[i]);
-				else
-					nuskriaustieji.push_back(studentai[i]);
-			}
-			auto end = high_resolution_clock::now();
-			duration<double> diff = end - start;
-			cout << "Studentu rusiavimas i 2 grupes uztruko : " << diff.count() << "s\n";
+				vector<stud> talentai;
+				vector<stud> nuskriaustieji;
 
-			isvedimas("talentai" + to_string(kiek) + ".txt", talentai);
-			isvedimas("nuskriaustieji" + to_string(kiek) + ".txt", nuskriaustieji);
+				studgrupvek1(studentai, nuskriaustieji, talentai);
+				isvedimas("talentai" + to_string(a) + ".txt", talentai);
+				isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+			}
+			else if (strategija == 2)
+			{
+				vector<stud> nuskriaustieji;
+
+				studgrupvek2(studentai, nuskriaustieji);
+				isvedimas("talentai" + to_string(a) + ".txt", studentai);
+				isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+			}
+
+			else
+			{
+				vector<stud> nuskriaustieji;
+				studgrupvekopt(studentai, nuskriaustieji);
+				isvedimas("talentai" + to_string(a) + ".txt", studentai);
+				isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+			}
 
 			auto endviso = high_resolution_clock::now();
 			duration<double> diffviso = endviso - startviso;
@@ -66,30 +75,39 @@ void kadarytvek(string raide)
 		skaitymas(studentai, failas + ".txt", &pazskc);
 		if (studentai.size() == 0)
 			return;
+		int a = studentai.size();
+
 		sort(studentai.begin(), studentai.end(), compare);
 
-		vector<stud> talentai;
-		vector<stud> nuskriaustieji;
 
-		auto start = high_resolution_clock::now();
-
-		for (int i = 0; i < studentai.size(); i++)
+		if (strategija == 1)
 		{
-			if (studentai[i].gal >= 5)
-				talentai.push_back(studentai[i]);
-			else
-				nuskriaustieji.push_back(studentai[i]);
+			vector<stud> talentai;
+			vector<stud> nuskriaustieji;
+
+			studgrupvek1(studentai, nuskriaustieji, talentai);
+			isvedimas("talentai" + to_string(a) + ".txt", talentai);
+			isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
 		}
-		auto end = high_resolution_clock::now();
-		duration<double> diff = end - start;
-		cout << "Studentu rusiavimas i 2 grupes uztruko : " << diff.count() << "s\n";
+		else if (strategija == 2)
+		{
+			vector<stud> nuskriaustieji;
 
-		isvedimas("talentai" + to_string(studentai.size()) + ".txt", talentai);
-		isvedimas("nuskriaustieji" + to_string(studentai.size()) + ".txt", nuskriaustieji);
+			studgrupvek2(studentai, nuskriaustieji);
+			isvedimas("talentai" + to_string(a) + ".txt", studentai);
+			isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
 
+		else
+		{
+			vector<stud> nuskriaustieji;
+			studgrupvekopt(studentai, nuskriaustieji);
+			isvedimas("talentai" + to_string(a) + ".txt", studentai);
+			isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
 		auto endviso = high_resolution_clock::now();
 		duration<double> diffviso = endviso - startviso;
-		cout << "Testas su " << studentai.size() << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl;
+		cout << "Testas su " << a << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl;
 	}
 	else
 	{
@@ -106,31 +124,41 @@ void kadarytvek(string raide)
 		{
 			input(studentai, i);
 		}
+
+		int a = studentai.size();
+
 		sort(studentai.begin(), studentai.end(), compare);
 
 		auto startviso = chrono::high_resolution_clock::now();
 
-		vector<stud> talentai;
-		vector<stud> nuskriaustieji;
-
-		auto start = high_resolution_clock::now();
-
-		for (int i = 0; i < studentai.size(); i++)
+		if (strategija == 1)
 		{
-			if (studentai[i].gal >= 5)
-				talentai.push_back(studentai[i]);
-			else
-				nuskriaustieji.push_back(studentai[i]);
-		}
-		auto end = high_resolution_clock::now();
-		duration<double> diff = end - start;
-		cout << "Studentu rusiavimas i 2 grupes uztruko : " << diff.count() << "s\n";
+			vector<stud> talentai;
+			vector<stud> nuskriaustieji;
 
-		isvedimas("talentai" + to_string(studentai.size()) + ".txt", talentai);
-		isvedimas("nuskriaustieji" + to_string(studentai.size()) + ".txt", nuskriaustieji);
+			studgrupvek1(studentai, nuskriaustieji, talentai);
+			isvedimas("talentai" + to_string(a) + ".txt", talentai);
+			isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
+		else if (strategija == 2)
+		{
+			vector<stud> nuskriaustieji;
+
+			studgrupvek2(studentai, nuskriaustieji);
+			isvedimas("talentai" + to_string(a) + ".txt", studentai);
+			isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
+
+		else
+		{
+			vector<stud> nuskriaustieji;
+			studgrupvekopt(studentai, nuskriaustieji);
+			isvedimas("talentai" + to_string(a) + ".txt", studentai);
+			isvedimas("nuskriaustieji" + to_string(a) + ".txt", nuskriaustieji);
+		}
 
 		auto endviso = high_resolution_clock::now();
 		duration<double> diffviso = endviso - startviso;
-		cout << "Testas su " << studentai.size() << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
+		cout << "Testas su " << a << " studentu/-ais uztruko: " << diffviso.count() << "s" << endl << endl;
 	}
 }

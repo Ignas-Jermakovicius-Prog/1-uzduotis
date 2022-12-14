@@ -4,4 +4,6 @@
 
 using namespace std;
 
-void kadarytlist(string raide);
+
+void kadarytlist(string raide, int strategija);
+

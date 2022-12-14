@@ -12,6 +12,7 @@ int countWords(string const& str)
 	return std::distance(istream_iterator<string>(stream), istream_iterator<string>());
 }
 
+
 int randompaz()
 {
 	mt19937 mt(static_cast<long unsigned int>(high_resolution_clock::now().time_since_epoch().count()));
@@ -134,6 +135,8 @@ bool compare(const stud& a, const stud& b)
 {
 	if (a.gal != b.gal)
 		return a.gal > b.gal;
+	if (a.med != b.med)
+		return a.med > b.med;
 	else if (a.Vard != b.Vard)
 		return a.Vard < b.Vard;
 	else
@@ -210,7 +213,7 @@ void skaitymas(vector<stud>& S, string failopavadinimas, int* kiek)
 		}
 		r.close();
 	}
-	catch (int e) 
+	catch (int e)
 	{
 		cout << "Failo tokiu pavadinimu nera.";
 		return;
@@ -269,12 +272,115 @@ void skaitymaslist(list<stud>& S, string failopavadinimas, int* kiek)
 		cout << "Negalima atidaryti failo arba jis tuscias." << endl;
 }
 
+bool kuriame(stud c)
+{
+	return c.gal < 5;
+}
+
+void studgrupvek1(vector<stud> studentai, vector<stud>& nuskriaustieji, vector<stud>& talentai)
+{
+	auto start = high_resolution_clock::now();
+	for (int i = 0; i < studentai.size(); i++)
+	{
+		if (kuriame(studentai[i]))
+			nuskriaustieji.push_back(studentai[i]);
+		else
+			talentai.push_back(studentai[i]);			
+	}
+	auto end = high_resolution_clock::now();
+	duration<double> diff = end - start;
+	cout << "Studentu rusiavimas i 2 grupes uztruko(1 strategija, vector): " << diff.count() << "s\n";
+}
+
+void studgruplist1(list<stud>& studentai, list<stud>& nuskriaustieji, list<stud>& talentai)
+{
+	auto start = high_resolution_clock::now();
+	list<stud>::iterator it = studentai.begin();
+	while (it != studentai.end())
+	{
+		if (kuriame(*it))
+			nuskriaustieji.push_back(*it);
+		else
+			talentai.push_back(*it);
+
+		++it;
+	}
+	auto end = high_resolution_clock::now();
+	duration<double> diff = end - start;
+	cout << "Studentu rusiavimas i 2 grupes uztruko(1 strategija, list): " << diff.count() << "s\n";
+}
+
+void studgrupvek2(vector<stud>& studentai, vector<stud>& nuskriaustieji)
+{
+	auto start = high_resolution_clock::now();
+	vector<stud>::iterator it = studentai.end();
+	--it;
+	while(it >= studentai.begin())
+	{
+		if (kuriame(*it))
+		{
+			nuskriaustieji.push_back(*it);
+			it = studentai.erase(it);
+			--it;
+		}
+		else
+			--it;
+	}
+	auto end = high_resolution_clock::now();
+	duration<double> diff = end - start;
+	cout << "Studentu rusiavimas i 2 grupes uztruko(2 strategija, vector): " << diff.count() << "s\n";
+}
+
+void studgruplist2(list<stud>& studentai, list<stud>& nuskriaustieji)
+{
+	auto start = high_resolution_clock::now();
+	list<stud>::iterator it = studentai.begin();
+	while (it != studentai.end())
+	{
+		if (kuriame(*it))
+		{
+			nuskriaustieji.push_back(*it);
+			studentai.erase(it++);
+		}
+		else
+			++it;
+	}
+	auto end = high_resolution_clock::now();
+	duration<double> diff = end - start;
+	cout << "Studentu rusiavimas i 2 grupes uztruko(2 strategija, list): " << diff.count() << "s\n";
+}
+
+void studgrupvekopt(vector<stud>& studentai, vector<stud>& nuskriaustieji)
+{
+	auto start = high_resolution_clock::now();
+	vector<stud>::iterator it = find_if(studentai.begin(), studentai.end(), kuriame);
+	if (it != studentai.end()) {
+		copy(it, studentai.end(), back_inserter(nuskriaustieji));
+	}
+	studentai.resize(studentai.size() - nuskriaustieji.size());
+	auto end = high_resolution_clock::now();
+	duration<double> diff = end - start;
+	cout << "Studentu rusiavimas i 2 grupes uztruko(3 strategija, vector): " << diff.count() << "s\n";
+}
+
+void studgruplistopt(list<stud>& studentai, list<stud>& nuskriaustieji)
+{
+	auto start = high_resolution_clock::now();
+	list<stud>::iterator it = find_if(studentai.begin(), studentai.end(), kuriame);
+	if (it != studentai.end()) {
+		copy(it, studentai.end(), back_inserter(nuskriaustieji));
+	}
+	studentai.resize(studentai.size() - nuskriaustieji.size());
+	auto end = high_resolution_clock::now();
+	duration<double> diff = end - start;
+	cout << "Studentu rusiavimas i 2 grupes uztruko(3 strategija, list): " << diff.count() << "s\n";
+}
+
 void isvedimas(string failo_pavadinimas, vector<stud> S)
 {
 	auto matavimo_pradzia = high_resolution_clock::now();
 
 	ofstream stud_failas(failo_pavadinimas);
-
 
 	stud_failas << left << setw(25) << "Vardas" << setw(25) << "Pavarde" << setw(15) << "Gal.(vid)" << setw(15) << "Gal.(med)" << endl;
 

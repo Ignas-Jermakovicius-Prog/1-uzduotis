@@ -5,4 +5,5 @@
 
 using namespace std;
 
-void kadarytabiem(string raide);
+void kadarytabiem(int strategija);
+

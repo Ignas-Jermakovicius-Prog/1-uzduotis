@@ -1,18 +1,14 @@
-# V0.4
+
+# V1.0
 Testavimo sistemos parametrai: CPU: AMD Ryzen 7 5800H with Radeon Graphics @ 3.20 GHz, RAM: 16.0 GB, SSD: 476GB
 
-Duomenų nuskaitymas iš failų:
+Pirma strategija (dviejų naujų vektorių/listų sukūrimas):
+![image](https://user-images.githubusercontent.com/114738526/205181324-4c520cce-1462-42d2-9314-0c7b2b23891f.png)
+
+Antroji strategija(vieno naujo vektoriaus/list'o sukūrimas, paliekant pradiniame talentingus studentus):
+![image](https://user-images.githubusercontent.com/114738526/205441262-cece5d83-eed3-46b1-babb-4e0a85797917.png)
 
 
-|       |       1000 |     10000 |   100000 |  1000000 | 10000000 |
-|   --- |        --- |      ---  |     ---  |    ---   |    ---   |
-| Vector| 0.004314s  | 0.0156839s| 0.141334s| 1.42481s | 14.4696s |
-| List  | 0.0016492s | 0.0139762s| 0.140468s| 1.45837s | 14.3941s |
-
-Studentų rūšiavimas į dvi grupes:
-
-|       |       1000 |     10000 |   100000 |  1000000 | 10000000 |
-|   --- |        --- |      ---  |     ---  |    ---   |    ---   |
-|Vector | 0.0001215s | 0.0016568s|0.0200248s|0.255469s | 2.90975s |
-| List  | 0.0001221s | 0.0011378s|0.0210761s|0.25152s  | 2.45141s |
+Trečioji strategija(optimizuota naudojant copy ir find_if algoritmus):
+![image](https://user-images.githubusercontent.com/114738526/205181371-f39f0115-c3f5-484c-9232-94d68b7fa0ed.png)
 

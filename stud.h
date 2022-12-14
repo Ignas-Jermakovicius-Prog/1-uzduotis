@@ -1,6 +1,5 @@
 #pragma once
-#include <string>
-#include <vector>
+#include "build_lib.h";
 using namespace std;
 
 struct stud {
@@ -10,3 +9,4 @@ struct stud {
     float gal;
     float med;
 };
+

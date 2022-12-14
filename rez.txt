@@ -1,0 +1,4 @@
+Vardas              Pavarde             Galutinis(vid.)/    Galutinis(med.)
+--------------------------------------------------------------------------
+Arnas               But                 6.4                 6.4                 
+Arnas               Jer                 6.4                 6.4                 

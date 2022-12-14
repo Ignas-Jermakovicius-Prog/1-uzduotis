@@ -181,6 +181,7 @@ void skaitymas(vector<stud>& S, string failopavadinimas, int* kiek)
 
 	int studentas = 0;
 	int temp;
+
 	string buff;
 	ifstream r;
 	try {
@@ -266,6 +267,7 @@ void skaitymaslist(list<stud>& S, string failopavadinimas, int* kiek)
 	auto end = high_resolution_clock::now();
 	duration<double> diff = end - start;
 	cout << "Failo nuskaitymas su " + to_string(S.size()) + " studentu/-ais uztruko(list): " << diff.count() << "s\n";
+
 	if (S.size() == 0)
 		cout << "Negalima atidaryti failo arba jis tuscias." << endl;
 }
@@ -374,7 +376,6 @@ void studgruplistopt(list<stud>& studentai, list<stud>& nuskriaustieji)
 	cout << "Studentu rusiavimas i 2 grupes uztruko(3 strategija, list): " << diff.count() << "s\n";
 }
 
-
 void isvedimas(string failo_pavadinimas, vector<stud> S)
 {
 	auto matavimo_pradzia = high_resolution_clock::now();
@@ -386,6 +387,7 @@ void isvedimas(string failo_pavadinimas, vector<stud> S)
 	for (int i = 0; i < S.size(); i++)
 	{
 		stud laikstud = S[i];
+
 		stud_failas << left << setw(25) << laikstud.Vard << setw(25) << laikstud.Pav
 			<< setw(15) << setprecision(3) << laikstud.gal << setw(15) << setprecision(3) << laikstud.med << endl;
 	}
@@ -411,6 +413,7 @@ void isvedimaslist(string failo_pavadinimas, list<stud> S)
 		stud_failas << left << setw(25) << it->Vard << left << setw(25) << it->Pav
 			<< setw(15) << setprecision(3) << it->gal << setw(15) << setprecision(3) << it->med << endl;
 		it++;
+
 	}
 
 	stud_failas.close();

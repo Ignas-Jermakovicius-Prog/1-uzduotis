@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 void kadarytlist(string raide, int strategija)
 {
 	if (raide == "r" || raide == "R")
@@ -76,7 +77,7 @@ void kadarytlist(string raide, int strategija)
 		skaitymaslist(studentai, failas + ".txt", &pazskc);
 		if (studentai.size() == 0)
 			return;
-		int a = studentai.size();
+    int a = studentai.size();
 
 		studentai.sort(compare);
 

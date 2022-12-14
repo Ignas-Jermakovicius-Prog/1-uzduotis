@@ -124,6 +124,7 @@ void kadarytvek(string raide, int strategija)
 		{
 			input(studentai, i);
 		}
+
 		int a = studentai.size();
 
 		sort(studentai.begin(), studentai.end(), compare);

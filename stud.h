@@ -12,3 +12,4 @@ struct stud {
         return v.Vard == Vard && v.Pav == Pav && v.gal == gal;
     }
 };
+

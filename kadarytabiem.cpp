@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 void kadarytabiem(int strategija)
 {
 	vector<stud> studentai;

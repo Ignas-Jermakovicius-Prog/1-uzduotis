@@ -6,3 +6,4 @@
 using namespace std;
 
 void kadarytabiem(int strategija);
+

@@ -1,8 +1,3 @@
-
-# 1-oji užduotis
-#V0.1
-V0.1 versijoje pirmiausia yra nuskaitomi įvesti studento duomenys(vardas, pavardė), tada yra galimybė generuoti atsitiktinius studento pažymius, ar įvesti studento pažymius patiems. Galiausiai atspausdinami rezultatai su studento galutiniais balais (apskaičiuota pagal vidurkį ir medianą). Programa realizuota dviem būdais, kai namų darbų rezultatai ir visi studentai saugomi į: 1) tradicinį dinaminį C masyvą. 2) std::vector tipo konteinerį.
-
 #V1.0
 Testavimo sistemos parametrai: CPU: AMD Ryzen 7 5800H with Radeon Graphics @ 3.20 GHz, RAM: 16.0 GB, SSD: 476GB
 

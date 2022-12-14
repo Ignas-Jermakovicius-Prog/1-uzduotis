@@ -9,3 +9,4 @@ struct stud {
     float gal;
     float med;
 };
+
